@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+   </head>
+   <body>
+      <script>
+		window.onmessage = function(e) {
+			if (e.origin !== "https://krunker.io") {
+				return;
+			}
+			var payload = JSON.parse(e.data);
+			switch(payload.method) {
+				case 'set':
+					localStorage.setItem(payload.key, JSON.stringify(payload.data));
+					break;
+				case 'get'
+					postMessage(localStorage.getItem(payload.key), "*");
+					break;
+				case 'remove':
+					localStorage.removeItem(payload.key);
+					break;
+			}
+		};
+	  </script>
+   </body>
+</html>
